@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://trylovecatch.github.io">
+  <title>JavaScript核心概念之作用域链(Scope Chain) | TryLoveCatch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+
+全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript核心概念之作用域链(Scope Chain)">
+<meta property="og:url" content="http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/index.html">
+<meta property="og:site_name" content="TryLoveCatch">
+<meta property="og:description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+
+全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/js-ecs.jpg">
+<meta property="og:updated_time" content="2016-12-04T09:23:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript核心概念之作用域链(Scope Chain)">
+<meta name="twitter:description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+
+全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
+<meta name="twitter:image" content="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="TryLoveCatch" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/favicon.ico">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/assets/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">TryLoveCatch</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">学习是一种信仰</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/poem">诗词</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/TryLoveCatch" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">TryLoveCatch</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/assets/avatar.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">TryLoveCatch</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">学习是一种信仰</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/poem">诗词</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/TryLoveCatch" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-js-core-scope-chain" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript核心概念之作用域链(Scope Chain)
+    </h1>
+  
+
+        <a href="/2016/12/04/js-core-scope-chain/" class="archive-article-date">
+  	<time datetime="2016-12-04T09:20:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="VO（variable-object）"><a href="#VO（variable-object）" class="headerlink" title="VO（variable object）"></a>VO（variable object）</h3><p>&emsp;&emsp;一般指全局，是全局执行上下文的一个属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">activeExecutionContext = &#123;</div><div class="line">  <span class="attr">VO</span>: &#123;</div><div class="line">    <span class="comment">// 上下文数据（var, FD, function arguments)</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的对象；<br>这个对象只存在一份，它的属性在程序中任何地方都可以访问，全局对象的生命周期终止于程序退出那一刻。<br>只有全局上下文的变量对象允许通过VO的属性名称来间接访问</p>
+</blockquote>
+<p>&emsp;&emsp;而在全局对象里<br>&emsp;&emsp;VO === this === global<br><a id="more"></a></p>
+<h3 id="AO（activation-object）"><a href="#AO（activation-object）" class="headerlink" title="AO（activation object）"></a>AO（activation object）</h3><p>&emsp;&emsp;在函数执行上下文中，VO是不能直接访问的，此时由活动对象(activation object,缩写为AO)扮演VO的角色，<font color="#ff0000">AO比VO多了一个arguments变量。</font></p>
+<p>&emsp;&emsp;<font color="#ff0000">活动对象是在进入函数上下文时刻被创建的，它通过函数的arguments属性初始化。</font></p>
+<h2 id="执行上下文（execution-context-简称-EC）"><a href="#执行上下文（execution-context-简称-EC）" class="headerlink" title="执行上下文（execution context 简称-EC）"></a>执行上下文（execution context 简称-EC）</h2><p>EC分两种，全局执行上下文和函数执行上下文。全局执行上下文只有一份，函数执行上下文可以有多个。<font color="#ff0000">对于每个Execution Context都有三个重要的属性，变量对象（Variable object，VO），作用域链（Scope chain）和this。</font></p>
+<h3 id="执行上下文栈（Execution-context-stack，ECS）"><a href="#执行上下文栈（Execution-context-stack，ECS）" class="headerlink" title="执行上下文栈（Execution context stack，ECS）"></a>执行上下文栈（Execution context stack，ECS）</h3><p>当一段程序开始时，会先进入全局执行上下文环境[global execution context]，用来存储当前上下文中所有已定义或可获取的变量、函数等，这个也是堆栈中最底部的元素，全局上下文取决于执行环境，如Node中的global和Browser中的window</p>
+<p>在生成新的上下文时，首先会绑定该上下文的变量对象，其中包括arguments和该函数中定义的变量；之后会创建属于该上下文的作用域链（scope chain），最后将this赋予这一function所属的Object，这一过程可以通过下图表示</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg" alt=""></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"global var"</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outerFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> b = <span class="string">"var in outerFunc"</span>;</div><div class="line">    <span class="built_in">console</span>.log(b);</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">innerFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> c = <span class="string">"var in innerFunc"</span>;</div><div class="line">        <span class="built_in">console</span>.log(c);</div><div class="line">        foo();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    innerFunc();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">outerFunc();</div></pre></td></tr></table></figure>
+<p>代码首先进入Global Execution Context，然后依次进入outerFunc，innerFunc和foo的执行上下文，ECS就可以表示为：</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/js-ecs.jpg" alt=""></p>
+<p>&emsp;&emsp;<font color="#ff0000">可以看出来，Js本身是单线程的，每当有function被执行时，就会产生一个新的上下文，这一上下文会被压入Js的ECS中，function执行结束后则被弹出，因此Js解释器总是在栈顶上下文中执行。</font>  </p>
+<p>执行上下文的代码被分成两个基本的阶段来处理：</p>
+<ol>
+<li>进入执行上下文(当函数被调用，但是开始执行函数内部代码之前)</li>
+<li>执行代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function test(a, b) &#123;</div><div class="line">  var c = 10;</div><div class="line">  function d() &#123;&#125;</div><div class="line">  var e = function _e() &#123;&#125;;</div><div class="line">  (function x() &#123;&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(10); // call</div></pre></td></tr></table></figure>
+<h3 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h3><p>这个阶段，VO将会包含如下属性（顺序也是如此）：</p>
+<ol>
+<li>函数的所有形参<br>&emsp;&emsp;没有传递对应参数的话，那么由名称和undefined值组成的一种变量对象的属性也将被创建。</li>
+<li>所有函数声明<br>&emsp;&emsp;如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li>
+<li>所有变量声明<br>&emsp;&emsp;如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性。<br>这些就是上篇声明提升Hoisting的原因，加强记忆，我们在看一个例子：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(foo);</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line">    <span class="built_in">console</span>.log(baz);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"bar"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> bar = <span class="number">20</span>;</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"baz"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>结果如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="literal">undefined</span></div><div class="line">[<span class="built_in">Function</span>: bar]</div><div class="line">[<span class="built_in">Function</span>: baz]</div><div class="line"><span class="number">20</span></div></pre></td></tr></table></figure></p>
+<p>声明提升，代码改造一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"bar"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"baz"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> foo;</div><div class="line">    <span class="keyword">var</span> bar;</div><div class="line">    </div><div class="line">    <span class="built_in">console</span>.log(foo);</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line">    <span class="built_in">console</span>.log(baz);</div><div class="line"></div><div class="line">    foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    bar = <span class="number">20</span>;</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line"></div><div class="line">&#125;)()</div></pre></td></tr></table></figure></p>
+<p>开头那个例子，当进入带有参数10的test函数上下文时，AO表现为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">AO(test) = &#123;</div><div class="line">  a: 10,</div><div class="line">  b: undefined,</div><div class="line">  d: &lt;reference to FunctionDeclaration &quot;d&quot;&gt;</div><div class="line">  c: undefined,</div><div class="line">  e: undefined</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>注意，AO里并不包含函数“x”。这是因为“x”是一个函数表达式(FunctionExpression, 缩写为 FE) 而不是函数声明，函数表达式不会影响VO。</p>
+<p>&emsp;&emsp;<font color="#ff0000">这个阶段，其实可以解释上一篇关于声明提升的原理，变量声明在顺序上跟在函数声明和形式参数声明之后，变量声明不会干扰同名的形参和函数。</font></p>
+<h3 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h3><p>这个周期内，AO已经拥有了属性，不过，并不是所有的属性都有值，大部分属性的值还是系统默认的初始值undefined 。</p>
+<p>还是前面那个例子, AO在代码执行期间被修改如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">AO[<span class="string">'c'</span>] = <span class="number">10</span>;</div><div class="line">AO[<span class="string">'e'</span>] = <span class="xml"><span class="tag">&lt;<span class="name">reference</span> <span class="attr">to</span> <span class="attr">FunctionExpression</span> "<span class="attr">_e</span>"&gt;</span>;</span></div></pre></td></tr></table></figure></p>
+<p>在看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">    var a = 1;</div><div class="line">&#125; else &#123;</div><div class="line">    var b = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(a); // 1</div><div class="line">console.log(b); // undefined,不是b没有声明，而是b的值是undefined</div></pre></td></tr></table></figure></p>
+<p>虽然else部分代码永远不会执行，但是不管怎样，变量“b”仍然存在于VO中。javascript没有块状作用域。</p>
+<h2 id="作用域链（scope-chain）"><a href="#作用域链（scope-chain）" class="headerlink" title="作用域链（scope chain）"></a>作用域链（scope chain）</h2><p>作用域链，是在函数调用时创建的，包含该函数的AO和[[scope]]，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Scope = AO + [[Scope]]</div></pre></td></tr></table></figure></p>
+<p>这个涉及到函数的的生命周期，它分为创建和激活阶段（调用时）。</p>
+<p>还是最开始的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</div><div class="line">    alert(x +  y + z);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  bar();</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(); <span class="comment">// 60</span></div></pre></td></tr></table></figure></p>
+<h3 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h3><p>&emsp;&emsp;<font color="#ff0000">[[scope]]是函数内部的一个属性，与作用域链对比，[[scope]]是函数的一个属性而不是上下文。</font></p>
+<p>&emsp;&emsp;<font color="#ff0000">[[scope]]在函数创建时已经存在，静态不变的，永远永远，直至函数销毁。即：函数可以永不调用，但[[scope]]属性已经写入，并存储在函数对象中。</font></p>
+<p>[[scope]]保存所有父VO，举个例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</div><div class="line">    alert(x +  y + z);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  bar();</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(); <span class="comment">// 60</span></div></pre></td></tr></table></figure>
+<p>程序开始执行时，创建了全局执行上下文，并压入ECS底部：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">globalContext.VO === Global = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">10</span></div><div class="line">  foo: <span class="function"><span class="keyword">function</span>&gt;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在foo创建时，foo的[[scope]]属性是：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foo.[[Scope]] = [</div><div class="line">  globalContext.VO <span class="comment">// === Global</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>内部函数bar创建时，其[[scope]]为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bar.[[Scope]] = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><p>当执行foo()时，进入foo的EC，可参考上面关于EC的两个阶段，总的来说，这个时候很foo的AO对象创建了，如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fooContext.AO = &#123;</div><div class="line">  <span class="attr">y</span>: <span class="number">20</span>,</div><div class="line">  <span class="attr">bar</span>: <span class="function"><span class="keyword">function</span>&gt;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>这个时候，foo的SC（作用域链）就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fooContext.Scope = fooContext.AO + foo.[[Scope]] <span class="comment">// i.e.:</span></div><div class="line"></div><div class="line">fooContext.Scope = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>执行foo的时候，bar也就执行了创建操作<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bar.[[Scope]] = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>接下来调用了bar()，所以bar的AO对象创建了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">barContext.AO = &#123;</div><div class="line">  <span class="attr">z</span>: <span class="number">30</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>这个时候，bar的SC（作用域链）就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">barContext.Scope = barContext.AO + bar.[[Scope]] <span class="comment">// i.e.:</span></div><div class="line"></div><div class="line">barContext.Scope = [</div><div class="line">  barContext.AO,</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>然后，程序执行到x +  y + z，开始在作用域链中查找变量<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">x</div><div class="line">barContext.AO (没有找到)</div><div class="line">fooContext.AO (没有找到)</div><div class="line">globalContext.VO (找到，返回<span class="number">10</span>)</div><div class="line"></div><div class="line">y</div><div class="line">barContext.AO (没有找到)</div><div class="line">fooContext.AO (找到，返回<span class="number">20</span>)</div><div class="line">globalContext.VO (没有查找)</div><div class="line"></div><div class="line">z</div><div class="line">barContext.AO (找到，返回<span class="number">30</span>)</div><div class="line">fooContext.AO (没有查找)</div><div class="line">globalContext.VO (没有查找)</div></pre></td></tr></table></figure></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>&emsp;&emsp;<font color="#ff0000">Scope = AO + [[Scope]]<br></font></p>
+<ol>
+<li>全局EC只有一个，永远位于ECS栈底。</li>
+<li>函数创建时，作用域[[scope]]就创建了，不会更改</li>
+<li>函数执行时，当前函数的EC生成，通过arguments初始化AO并绑定到EC，然后与[[scope]]创建函数的作用域链(SC)，之后this赋值。</li>
+</ol>
+<p>参考：<a href="https://www.kancloud.cn/kancloud/deep-understand-javascript/43689" target="_blank" rel="external">https://www.kancloud.cn/kancloud/deep-understand-javascript/43689</a><br><a href="https://www.kancloud.cn/kancloud/deep-understand-javascript/43691" target="_blank" rel="external">https://www.kancloud.cn/kancloud/deep-understand-javascript/43691</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript核心概念/">javascript核心概念</a></li></ul>
+	</div>
+
+      
+
+      
+
+      
+        <div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode"></div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/12/04/js-core-cifazuoyongyu/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JavaScript核心概念之词法作用域
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/04/js-core-hoisting/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript核心概念之声明提升(hoisting)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="js-core-scope-chain" data-title="JavaScript核心概念之作用域链(Scope Chain)" data-url="http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"trylovecatch"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 TryLoveCatch
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/javascript核心概念/" style="font-size: 20px;">javascript核心概念</a> <a href="/tags/自定义View/" style="font-size: 10px;">自定义View</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">呵呵&lt;br&gt;&lt;br&gt;随便玩玩&lt;br&gt;哈哈</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

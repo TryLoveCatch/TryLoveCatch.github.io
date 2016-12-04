@@ -132,6 +132,175 @@
       <div class="body-wrap">
         
   
+    <article id="post-js-core-cifazuoyongyu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/04/js-core-cifazuoyongyu/">JavaScript核心概念之词法作用域</a>
+    </h1>
+  
+
+        <a href="/2016/12/04/js-core-cifazuoyongyu/" class="archive-article-date">
+  	<time datetime="2016-12-04T09:24:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&emsp;&emsp;词法作用域就是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变。</p>
+</blockquote>
+<p>&emsp;&emsp;也就是说，无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定。<br>
+        <a class="article-more-a"  href="/2016/12/04/js-core-cifazuoyongyu/#more">more >></a>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript核心概念/">javascript核心概念</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/04/js-core-cifazuoyongyu/#more">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-js-core-scope-chain" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/04/js-core-scope-chain/">JavaScript核心概念之作用域链(Scope Chain)</a>
+    </h1>
+  
+
+        <a href="/2016/12/04/js-core-scope-chain/" class="archive-article-date">
+  	<time datetime="2016-12-04T09:20:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="VO（variable-object）"><a href="#VO（variable-object）" class="headerlink" title="VO（variable object）"></a>VO（variable object）</h3><p>&emsp;&emsp;一般指全局，是全局执行上下文的一个属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">activeExecutionContext = &#123;</div><div class="line">  <span class="attr">VO</span>: &#123;</div><div class="line">    <span class="comment">// 上下文数据（var, FD, function arguments)</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的对象；<br>这个对象只存在一份，它的属性在程序中任何地方都可以访问，全局对象的生命周期终止于程序退出那一刻。<br>只有全局上下文的变量对象允许通过VO的属性名称来间接访问</p>
+</blockquote>
+<p>&emsp;&emsp;而在全局对象里<br>&emsp;&emsp;VO === this === global<br>
+        <a class="article-more-a"  href="/2016/12/04/js-core-scope-chain/#more">more >></a>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript核心概念/">javascript核心概念</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/04/js-core-scope-chain/#more">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-js-core-hoisting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/04/js-core-hoisting/">JavaScript核心概念之声明提升(hoisting)</a>
+    </h1>
+  
+
+        <a href="/2016/12/04/js-core-hoisting/" class="archive-article-date">
+  	<time datetime="2016-12-04T09:15:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;&emsp;一般来讲，我认为javascript代码在执行时是由上到下一行一行执行的。但实际上这并不完全正确，主要是因为声明提升的存在，包括变量声明和函数声明。<br>
+        <a class="article-more-a"  href="/2016/12/04/js-core-hoisting/#more">more >></a>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript核心概念/">javascript核心概念</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/04/js-core-hoisting/#more">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-custom-view-measure" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -301,7 +470,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/自定义View/" style="font-size: 10px;">自定义View</a>
+    				<a href="/tags/javascript核心概念/" style="font-size: 20px;">javascript核心概念</a> <a href="/tags/自定义View/" style="font-size: 10px;">自定义View</a>
     			</div>
     	</section>
     

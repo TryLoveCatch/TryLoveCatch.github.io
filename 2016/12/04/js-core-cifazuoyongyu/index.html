@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://trylovecatch.github.io">
-  <title>Hello World | TryLoveCatch</title>
+  <title>JavaScript核心概念之词法作用域 | TryLoveCatch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="&amp;emsp;&amp;emsp;词法作用域就是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变。
+
+&amp;emsp;&amp;emsp;也就是说，无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://trylovecatch.github.io/2016/10/29/hello-world/index.html">
+<meta property="og:title" content="JavaScript核心概念之词法作用域">
+<meta property="og:url" content="http://trylovecatch.github.io/2016/12/04/js-core-cifazuoyongyu/index.html">
 <meta property="og:site_name" content="TryLoveCatch">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-10-29T08:03:20.000Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;词法作用域就是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变。
+
+&amp;emsp;&amp;emsp;也就是说，无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定。">
+<meta property="og:updated_time" content="2016-12-04T09:25:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="JavaScript核心概念之词法作用域">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;词法作用域就是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变。
+
+&amp;emsp;&amp;emsp;也就是说，无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定。">
   
     <link rel="alternative" href="/atom.xml" title="TryLoveCatch" type="application/atom+xml">
   
@@ -137,33 +140,35 @@ Quick">
 </nav>
 
       <div class="body-wrap">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-js-core-cifazuoyongyu" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      JavaScript核心概念之词法作用域
     </h1>
   
 
-        <a href="/2016/10/29/hello-world/" class="archive-article-date">
-  	<time datetime="2016-10-29T08:03:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-29</time>
+        <a href="/2016/12/04/js-core-cifazuoyongyu/" class="archive-article-date">
+  	<time datetime="2016-12-04T09:24:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <blockquote>
+<p>&emsp;&emsp;词法作用域就是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变。</p>
+</blockquote>
+<p>&emsp;&emsp;也就是说，无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定。<br><a id="more"></a><br>&emsp;&emsp;举个例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">20</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">&#125;</div><div class="line">foo();   <span class="comment">// 20</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">30</span>;</div><div class="line">    foo();   <span class="comment">// 20</span></div><div class="line">&#125;</div><div class="line">bar();</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;这个例子就是一个很好的印证，可以发现的是，无论foo在哪里调用，其a的值永远是全局作用域中的a的值，这就是词法作用域，定义函数时，作用域是在全局，那么foo上层作用域就是全局，<strong>改变其调用位置是不能改变其作用域链的，其作用域链是在定义时就决定好的。</strong></p>
+<h2 id="改变作用域"><a href="#改变作用域" class="headerlink" title="改变作用域"></a>改变作用域</h2><p>&emsp;&emsp;作用域也可以改变，javascript里面提供eval和with可以来改变作用域，但是不提倡使用，这里就略过不提了。</p>
+<font color="#FF0000"><br>&emsp;&emsp;其实，函数在创建的时候，其作用域[[scope]]就已经创建了，不是在执行的时候，因为函数创建后可能永远不执行，但是作用域是始终存在的，函数执行的时候，函数的活动对象创建，并添加到函数作用域链的最前方，和[[scope]]构成了函数的作用域链，并不会改变[[scope]]的值。<br></font>
+
+
+
+
 
       
 
@@ -172,6 +177,11 @@ Quick">
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript核心概念/">javascript核心概念</a></li></ul>
+	</div>
+
       
 
       
@@ -233,15 +243,11 @@ Quick">
   
 <nav id="article-nav">
   
-    <a href="/2016/12/04/custom-view-measure/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          测量（Measure）
-        
-      </div>
-    </a>
   
+    <a href="/2016/12/04/js-core-scope-chain/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript核心概念之作用域链(Scope Chain)</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -252,7 +258,7 @@ Quick">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="http://trylovecatch.github.io/2016/10/29/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="js-core-cifazuoyongyu" data-title="JavaScript核心概念之词法作用域" data-url="http://trylovecatch.github.io/2016/12/04/js-core-cifazuoyongyu/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
