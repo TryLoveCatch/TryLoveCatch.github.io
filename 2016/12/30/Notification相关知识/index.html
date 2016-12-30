@@ -6,27 +6,46 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://trylovecatch.github.io">
-  <title>JavaScript核心概念之作用域链(Scope Chain) | TryLoveCatch</title>
+  <title>Notification相关知识 | TryLoveCatch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+  <meta name="description" content="我会根据具体的功能来介绍不同的Notification。
+前言
+只要是Notification相关的代码，都用V4包里面的NotificationCompat。
 
-全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
+构建参数，使用NotificationCompat.Builder提供的各种方法。
+
+创建通知，请调用 NotificationCompat.Builder.build()，它将返回Builder配置相关参数的 Notification">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript核心概念之作用域链(Scope Chain)">
-<meta property="og:url" content="http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/index.html">
+<meta property="og:title" content="Notification相关知识">
+<meta property="og:url" content="http://trylovecatch.github.io/2016/12/30/Notification相关知识/index.html">
 <meta property="og:site_name" content="TryLoveCatch">
-<meta property="og:description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+<meta property="og:description" content="我会根据具体的功能来介绍不同的Notification。
+前言
+只要是Notification相关的代码，都用V4包里面的NotificationCompat。
 
-全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
-<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg">
-<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/js-ecs.jpg">
-<meta property="og:updated_time" content="2016-12-04T09:23:25.000Z">
+构建参数，使用NotificationCompat.Builder提供的各种方法。
+
+创建通知，请调用 NotificationCompat.Builder.build()，它将返回Builder配置相关参数的 Notification">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_layout_default.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_layout_large.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_style_big_text1.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_style_big_inbox.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_style_big_picture.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_update.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_update.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_action.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_action_headsup.png">
+<meta property="og:updated_time" content="2016-12-30T06:59:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript核心概念之作用域链(Scope Chain)">
-<meta name="twitter:description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+<meta name="twitter:title" content="Notification相关知识">
+<meta name="twitter:description" content="我会根据具体的功能来介绍不同的Notification。
+前言
+只要是Notification相关的代码，都用V4包里面的NotificationCompat。
 
-全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
-<meta name="twitter:image" content="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg">
+构建参数，使用NotificationCompat.Builder提供的各种方法。
+
+创建通知，请调用 NotificationCompat.Builder.build()，它将返回Builder配置相关参数的 Notification">
+<meta name="twitter:image" content="http://og9cdbtvi.bkt.clouddn.com/android_notification_layout_default.png">
   
     <link rel="alternative" href="/atom.xml" title="TryLoveCatch" type="application/atom+xml">
   
@@ -152,84 +171,164 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-js-core-scope-chain" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Notification相关知识" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript核心概念之作用域链(Scope Chain)
+      Notification相关知识
     </h1>
   
 
-        <a href="/2016/12/04/js-core-scope-chain/" class="archive-article-date">
-  	<time datetime="2016-12-04T09:20:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+        <a href="/2016/12/30/Notification相关知识/" class="archive-article-date">
+  	<time datetime="2016-12-30T06:10:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-30</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="VO（variable-object）"><a href="#VO（variable-object）" class="headerlink" title="VO（variable object）"></a>VO（variable object）</h3><p>&emsp;&emsp;一般指全局，是全局执行上下文的一个属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">activeExecutionContext = &#123;</div><div class="line">  <span class="attr">VO</span>: &#123;</div><div class="line">    <span class="comment">// 上下文数据（var, FD, function arguments)</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的对象；<br>这个对象只存在一份，它的属性在程序中任何地方都可以访问，全局对象的生命周期终止于程序退出那一刻。<br>只有全局上下文的变量对象允许通过VO的属性名称来间接访问</p>
-</blockquote>
-<p>&emsp;&emsp;而在全局对象里<br>&emsp;&emsp;VO === this === global<br><a id="more"></a></p>
-<h3 id="AO（activation-object）"><a href="#AO（activation-object）" class="headerlink" title="AO（activation object）"></a>AO（activation object）</h3><p>&emsp;&emsp;在函数执行上下文中，VO是不能直接访问的，此时由活动对象(activation object,缩写为AO)扮演VO的角色，<font color="#ff0000">AO比VO多了一个arguments变量。</font></p>
-<p>&emsp;&emsp;<font color="#ff0000">活动对象是在进入函数上下文时刻被创建的，它通过函数的arguments属性初始化。</font></p>
-<h2 id="执行上下文（execution-context-简称-EC）"><a href="#执行上下文（execution-context-简称-EC）" class="headerlink" title="执行上下文（execution context 简称-EC）"></a>执行上下文（execution context 简称-EC）</h2><p>EC分两种，全局执行上下文和函数执行上下文。全局执行上下文只有一份，函数执行上下文可以有多个。<font color="#ff0000">对于每个Execution Context都有三个重要的属性，变量对象（Variable object，VO），作用域链（Scope chain）和this。</font></p>
-<h3 id="执行上下文栈（Execution-context-stack，ECS）"><a href="#执行上下文栈（Execution-context-stack，ECS）" class="headerlink" title="执行上下文栈（Execution context stack，ECS）"></a>执行上下文栈（Execution context stack，ECS）</h3><p>当一段程序开始时，会先进入全局执行上下文环境[global execution context]，用来存储当前上下文中所有已定义或可获取的变量、函数等，这个也是堆栈中最底部的元素，全局上下文取决于执行环境，如Node中的global和Browser中的window</p>
-<p>在生成新的上下文时，首先会绑定该上下文的变量对象，其中包括arguments和该函数中定义的变量；之后会创建属于该上下文的作用域链（scope chain），最后将this赋予这一function所属的Object，这一过程可以通过下图表示</p>
-<p><img src="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg" alt=""></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"global var"</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outerFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> b = <span class="string">"var in outerFunc"</span>;</div><div class="line">    <span class="built_in">console</span>.log(b);</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">innerFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> c = <span class="string">"var in innerFunc"</span>;</div><div class="line">        <span class="built_in">console</span>.log(c);</div><div class="line">        foo();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    innerFunc();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">outerFunc();</div></pre></td></tr></table></figure>
-<p>代码首先进入Global Execution Context，然后依次进入outerFunc，innerFunc和foo的执行上下文，ECS就可以表示为：</p>
-<p><img src="http://og9cdbtvi.bkt.clouddn.com/js-ecs.jpg" alt=""></p>
-<p>&emsp;&emsp;<font color="#ff0000">可以看出来，Js本身是单线程的，每当有function被执行时，就会产生一个新的上下文，这一上下文会被压入Js的ECS中，function执行结束后则被弹出，因此Js解释器总是在栈顶上下文中执行。</font>  </p>
-<p>执行上下文的代码被分成两个基本的阶段来处理：</p>
-<ol>
-<li>进入执行上下文(当函数被调用，但是开始执行函数内部代码之前)</li>
-<li>执行代码</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function test(a, b) &#123;</div><div class="line">  var c = 10;</div><div class="line">  function d() &#123;&#125;</div><div class="line">  var e = function _e() &#123;&#125;;</div><div class="line">  (function x() &#123;&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(10); // call</div></pre></td></tr></table></figure>
-<h3 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h3><p>这个阶段，VO将会包含如下属性（顺序也是如此）：</p>
-<ol>
-<li>函数的所有形参<br>&emsp;&emsp;没有传递对应参数的话，那么由名称和undefined值组成的一种变量对象的属性也将被创建。</li>
-<li>所有函数声明<br>&emsp;&emsp;如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li>
-<li>所有变量声明<br>&emsp;&emsp;如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性。<br>这些就是上篇声明提升Hoisting的原因，加强记忆，我们在看一个例子：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(foo);</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line">    <span class="built_in">console</span>.log(baz);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"bar"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> bar = <span class="number">20</span>;</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"baz"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+        <p>我会根据具体的功能来介绍不同的Notification。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><p>只要是Notification相关的代码，都用<font color="#ff0000">V4包里面的NotificationCompat。</font></p>
 </li>
-</ol>
-<p>结果如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="literal">undefined</span></div><div class="line">[<span class="built_in">Function</span>: bar]</div><div class="line">[<span class="built_in">Function</span>: baz]</div><div class="line"><span class="number">20</span></div></pre></td></tr></table></figure></p>
-<p>声明提升，代码改造一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"bar"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"baz"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> foo;</div><div class="line">    <span class="keyword">var</span> bar;</div><div class="line">    </div><div class="line">    <span class="built_in">console</span>.log(foo);</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line">    <span class="built_in">console</span>.log(baz);</div><div class="line"></div><div class="line">    foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    bar = <span class="number">20</span>;</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line"></div><div class="line">&#125;)()</div></pre></td></tr></table></figure></p>
-<p>开头那个例子，当进入带有参数10的test函数上下文时，AO表现为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">AO(test) = &#123;</div><div class="line">  a: 10,</div><div class="line">  b: undefined,</div><div class="line">  d: &lt;reference to FunctionDeclaration &quot;d&quot;&gt;</div><div class="line">  c: undefined,</div><div class="line">  e: undefined</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>注意，AO里并不包含函数“x”。这是因为“x”是一个函数表达式(FunctionExpression, 缩写为 FE) 而不是函数声明，函数表达式不会影响VO。</p>
-<p>&emsp;&emsp;<font color="#ff0000">这个阶段，其实可以解释上一篇关于声明提升的原理，变量声明在顺序上跟在函数声明和形式参数声明之后，变量声明不会干扰同名的形参和函数。</font></p>
-<h3 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h3><p>这个周期内，AO已经拥有了属性，不过，并不是所有的属性都有值，大部分属性的值还是系统默认的初始值undefined 。</p>
-<p>还是前面那个例子, AO在代码执行期间被修改如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">AO[<span class="string">'c'</span>] = <span class="number">10</span>;</div><div class="line">AO[<span class="string">'e'</span>] = <span class="xml"><span class="tag">&lt;<span class="name">reference</span> <span class="attr">to</span> <span class="attr">FunctionExpression</span> "<span class="attr">_e</span>"&gt;</span>;</span></div></pre></td></tr></table></figure></p>
-<p>在看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">    var a = 1;</div><div class="line">&#125; else &#123;</div><div class="line">    var b = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(a); // 1</div><div class="line">console.log(b); // undefined,不是b没有声明，而是b的值是undefined</div></pre></td></tr></table></figure></p>
-<p>虽然else部分代码永远不会执行，但是不管怎样，变量“b”仍然存在于VO中。javascript没有块状作用域。</p>
-<h2 id="作用域链（scope-chain）"><a href="#作用域链（scope-chain）" class="headerlink" title="作用域链（scope chain）"></a>作用域链（scope chain）</h2><p>作用域链，是在函数调用时创建的，包含该函数的AO和[[scope]]，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Scope = AO + [[Scope]]</div></pre></td></tr></table></figure></p>
-<p>这个涉及到函数的的生命周期，它分为创建和激活阶段（调用时）。</p>
-<p>还是最开始的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</div><div class="line">    alert(x +  y + z);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  bar();</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(); <span class="comment">// 60</span></div></pre></td></tr></table></figure></p>
-<h3 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h3><p>&emsp;&emsp;<font color="#ff0000">[[scope]]是函数内部的一个属性，与作用域链对比，[[scope]]是函数的一个属性而不是上下文。</font></p>
-<p>&emsp;&emsp;<font color="#ff0000">[[scope]]在函数创建时已经存在，静态不变的，永远永远，直至函数销毁。即：函数可以永不调用，但[[scope]]属性已经写入，并存储在函数对象中。</font></p>
-<p>[[scope]]保存所有父VO，举个例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</div><div class="line">    alert(x +  y + z);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  bar();</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(); <span class="comment">// 60</span></div></pre></td></tr></table></figure>
-<p>程序开始执行时，创建了全局执行上下文，并压入ECS底部：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">globalContext.VO === Global = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">10</span></div><div class="line">  foo: <span class="function"><span class="keyword">function</span>&gt;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>在foo创建时，foo的[[scope]]属性是：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foo.[[Scope]] = [</div><div class="line">  globalContext.VO <span class="comment">// === Global</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>内部函数bar创建时，其[[scope]]为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bar.[[Scope]] = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><p>当执行foo()时，进入foo的EC，可参考上面关于EC的两个阶段，总的来说，这个时候很foo的AO对象创建了，如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fooContext.AO = &#123;</div><div class="line">  <span class="attr">y</span>: <span class="number">20</span>,</div><div class="line">  <span class="attr">bar</span>: <span class="function"><span class="keyword">function</span>&gt;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这个时候，foo的SC（作用域链）就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fooContext.Scope = fooContext.AO + foo.[[Scope]] <span class="comment">// i.e.:</span></div><div class="line"></div><div class="line">fooContext.Scope = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>执行foo的时候，bar也就执行了创建操作<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bar.[[Scope]] = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>接下来调用了bar()，所以bar的AO对象创建了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">barContext.AO = &#123;</div><div class="line">  <span class="attr">z</span>: <span class="number">30</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这个时候，bar的SC（作用域链）就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">barContext.Scope = barContext.AO + bar.[[Scope]] <span class="comment">// i.e.:</span></div><div class="line"></div><div class="line">barContext.Scope = [</div><div class="line">  barContext.AO,</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>然后，程序执行到x +  y + z，开始在作用域链中查找变量<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">x</div><div class="line">barContext.AO (没有找到)</div><div class="line">fooContext.AO (没有找到)</div><div class="line">globalContext.VO (找到，返回<span class="number">10</span>)</div><div class="line"></div><div class="line">y</div><div class="line">barContext.AO (没有找到)</div><div class="line">fooContext.AO (找到，返回<span class="number">20</span>)</div><div class="line">globalContext.VO (没有查找)</div><div class="line"></div><div class="line">z</div><div class="line">barContext.AO (找到，返回<span class="number">30</span>)</div><div class="line">fooContext.AO (没有查找)</div><div class="line">globalContext.VO (没有查找)</div></pre></td></tr></table></figure></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>&emsp;&emsp;<font color="#ff0000">Scope = AO + [[Scope]]<br></font></p>
+<li><p>构建参数，使用<code>NotificationCompat.Builder</code>提供的各种方法。</p>
+</li>
+<li><p>创建通知，请调用 <code>NotificationCompat.Builder.build()</code>，它将返回Builder配置相关参数的 Notification 对象。</p>
+</li>
+<li><p>要发出通知，请通过调用 <code>NotificationManager.notify()</code> 将 Notification 对象传递给系统。</p>
+</li>
+<li><p><font color="#ff0000">普通视图布局限制为 64 dp，扩展视图布局限制为 256 dp</font></p>
+<a id="more"></a>
+<h2 id="Notification构造"><a href="#Notification构造" class="headerlink" title="Notification构造"></a>Notification构造</h2><p>默认的notification，如下图：<br><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_layout_default.png" alt=""></p>
+</li>
+</ul>
+<p>big style的notification，如下图：<br><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_layout_large.png" alt=""></p>
 <ol>
-<li>全局EC只有一个，永远位于ECS栈底。</li>
-<li>函数创建时，作用域[[scope]]就创建了，不会更改</li>
-<li>函数执行时，当前函数的EC生成，通过arguments初始化AO并绑定到EC，然后与[[scope]]创建函数的作用域链(SC)，之后this赋值。</li>
+<li>内容标题 <code>setContentTitle()</code> <code>setBigContentTitle()</code></li>
+<li>大图标 <code>setLargeIcon()</code> <code>bigLargeIcon()</code></li>
+<li>内容 <code>setContentText()</code></li>
+<li>内容附加信息 <code>setContentInfo()</code> <code>setNumber()</code></li>
+<li>小图标 <code>setSmallIcon()</code></li>
+<li>时间 <code>setWhen()</code></li>
+<li>展开后的内容 <code>bigText()</code> <code>addLine()</code></li>
 </ol>
-<p>参考：<a href="https://www.kancloud.cn/kancloud/deep-understand-javascript/43689" target="_blank" rel="external">https://www.kancloud.cn/kancloud/deep-understand-javascript/43689</a><br><a href="https://www.kancloud.cn/kancloud/deep-understand-javascript/43691" target="_blank" rel="external">https://www.kancloud.cn/kancloud/deep-understand-javascript/43691</a></p>
+<p><strong>当没有<code>setLargeIcon()</code>时候，<code>setSmallIcon()</code>就表示位置2。</strong></p>
+<h2 id="必选项"><a href="#必选项" class="headerlink" title="必选项"></a>必选项</h2><p>官方文档里面写到：</p>
+<blockquote>
+<p>Notification 对象必须包含以下内容：</p>
+<p>小图标，由 setSmallIcon() 设置<br>标题，由 setContentTitle() 设置<br>详细文本，由 setContentText() 设置</p>
+</blockquote>
+<p>但实际上，我们一般只需要<code>setSmallIcon()</code>是必写的。因为大多数情况下，我们都是自定义view，会调用<code>setContent()</code>方法来设置<code>RemoteViews</code>，所以<code>setContentTitle()</code>和<code>setContentText()</code>就不要写了。</p>
+<h2 id="big-style"><a href="#big-style" class="headerlink" title="big style"></a>big style</h2><p>android 4.1之后提供的扩展通知，可展开，通俗就是大视图通知。</p>
+<p>关于big style，我们需要注意：</p>
+<ul>
+<li><strong>当该notification处于通知栏第一个的时候，才会展开。</strong></li>
+<li><strong>用户可以双指滑动改notification，也可展开。</strong></li>
+<li><strong>通过调用<code>setStyle()</code>方式来设置。</strong></li>
+<li><strong>4.1(包含)才会显示大视图，4.1之前不起作用。</strong></li>
+</ul>
+<p>系统给我们提供了三种style，我们大致说一下，因为这是三个不是重点。</p>
+<p>这三种风格，都会有两个共用方法：<br><code>setBigContentTitle()</code>：这个会在展开的时候，覆盖<code>setContentitle()</code>的设置。<br><code>setSummaryText()</code>：这个是在试图的最底部，增加一个文本，貌似没什么用。</p>
+<h3 id="BigTextStyle"><a href="#BigTextStyle" class="headerlink" title="BigTextStyle"></a>BigTextStyle</h3><p>大文字风格：显示一个大的文字块</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_style_big_text1.png" alt=""></p>
+<p><code>bigText()</code>：该方法可以设置一大段文字，会在展开时，覆盖<code>setContentText()</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android.support.v4.app.NotificationCompat.BigTextStyle style = <span class="keyword">new</span> android.support.v4.app.NotificationCompat.BigTextStyle();</div><div class="line">style.setBigContentTitle(<span class="string">"BigContentTitle"</span>)</div><div class="line">    .bigText(<span class="string">"很长很长很长很长很长很长很长很长很长"</span>)</div><div class="line">    .setSummaryText(<span class="string">"SummaryText"</span>);</div><div class="line">NotificationCompat.Builder builder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>)</div><div class="line">    .setContentTitle(<span class="string">"BigTextStyle"</span>)</div><div class="line">    .setContentText(<span class="string">"BigTextStyle演示示例"</span>)</div><div class="line">    .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">    .setStyle(style)</div><div class="line">    .setAutoCancel(<span class="keyword">true</span>)</div><div class="line">    .setDefaults(NotificationCompat.DEFAULT_ALL);</div><div class="line">Notification notification = builder.build();</div><div class="line">NotificationManager manger = (NotificationManager)</div><div class="line">            getSystemService(NOTIFICATION_SERVICE);</div><div class="line">manger.notify(TYPE_Inbox,notification);</div></pre></td></tr></table></figure>
+<h3 id="InboxStyle"><a href="#InboxStyle" class="headerlink" title="InboxStyle"></a>InboxStyle</h3><p>这个和BigTextStyle基本类似，不同就是提供的Api，这个里面的文字块控制换行。例如，IM消息提醒，同一个id的多条信息，可以合并成inbox模式，然后扩展的时候，显示每条消息的内容。</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_style_big_inbox.png" alt=""><br><code>addLine()</code>：该方法可以设置一行行的文字，可以调用很多次，会在展开时，覆盖<code>setContentText()</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">android.support.v4.app.NotificationCompat.InboxStyle style = <span class="keyword">new</span> android.support.v4.app.NotificationCompat.InboxStyle();</div><div class="line">style.setBigContentTitle(<span class="string">"BigContentTitle"</span>)</div><div class="line">    .addLine(<span class="string">"第一行"</span>)</div><div class="line">    .addLine(<span class="string">"第二行"</span>)</div><div class="line">    .addLine(<span class="string">"第三行"</span>)</div><div class="line">    .addLine(<span class="string">"第四行"</span>)</div><div class="line">    .addLine(<span class="string">"第五行"</span>)</div><div class="line">    .setSummaryText(<span class="string">"SummaryText"</span>);</div><div class="line">NotificationCompat.Builder builder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>)</div><div class="line">    .setContentTitle(<span class="string">"InboxStyle"</span>)</div><div class="line">    .setContentText(<span class="string">"InboxStyle演示示例"</span>)</div><div class="line">    .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">    .setStyle(style)</div><div class="line">    .setAutoCancel(<span class="keyword">true</span>)</div><div class="line">    .setDefaults(NotificationCompat.DEFAULT_ALL);</div><div class="line">Notification notification = builder.build();</div><div class="line">NotificationManager manger = (NotificationManager)</div><div class="line">            getSystemService(NOTIFICATION_SERVICE);</div><div class="line">manger.notify(TYPE_Inbox,notification);</div></pre></td></tr></table></figure>
+<h3 id="BigPictureStyle"><a href="#BigPictureStyle" class="headerlink" title="BigPictureStyle"></a>BigPictureStyle</h3><p>展开后，会在下方显示一张图片。</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_style_big_picture.png" alt=""></p>
+<p><code>bigPicture()</code>：需要一个bitmap对象 所以也不应该传过大的图 否则会oom<br><code>bigLargeIcon()</code>：会覆盖<code>setLargeIcon()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">android.support.v4.app.NotificationCompat.BigPictureStyle style = <span class="keyword">new</span> android.support.v4.app.NotificationCompat.BigPictureStyle();</div><div class="line">style.setBigContentTitle(<span class="string">"BigContentTitle"</span>)</div><div class="line">    .bigPicture(BitmapFactory.decodeResource(getResources(),</div><div class="line">                            R.drawable.small));</div><div class="line">    .setSummaryText(<span class="string">"SummaryText"</span>);</div><div class="line">NotificationCompat.Builder builder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>)</div><div class="line">    .setContentTitle(<span class="string">"BigPictureStyle"</span>)</div><div class="line">    .setContentText(<span class="string">"BigPictureStyle演示示例"</span>)</div><div class="line">    .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">    .setStyle(style)</div><div class="line">    .setAutoCancel(<span class="keyword">true</span>)</div><div class="line">    .setDefaults(NotificationCompat.DEFAULT_ALL);</div><div class="line">Notification notification = builder.build();</div><div class="line">NotificationManager manger = (NotificationManager)</div><div class="line">            getSystemService(NOTIFICATION_SERVICE);</div><div class="line">manger.notify(TYPE_Inbox,notification);</div></pre></td></tr></table></figure>
+<h3 id="bigContentView"><a href="#bigContentView" class="headerlink" title="bigContentView"></a>bigContentView</h3><p>这个才是重点，毕竟我们还是自定义的需求比较多。</p>
+<p><code>setContent()</code>：这个是默认notification的自定义view<br><code>notification.contentView</code>：同上<br><code>notification.bigContentView</code>：这个是big style的自定义view</p>
+<p>关键代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(android.os.Build.VERSION.SDK_INT &gt;= <span class="number">16</span>) &#123;</div><div class="line">    notification.bigContentView = remoteViews;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>bigContentView</code>这个属性，在<code>NotificationCompat</code>类里面是没有的，所以我们需要build出<code>Notification</code>之后来设置。</p>
+<p><code>setContent()</code>和<code>notification.bigContentView</code>是能够一起使用的，一个设置默认的view，一个设置big的view，所以我们可以给定两个布局。<br>不过，其实，也可以给一个大布局，这个大布局的64dip在默认的notification显示，其他的，在展开之后显示。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"#ff0000"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/img"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"64dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"64dp"</span></div><div class="line">        <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></div><div class="line">        <span class="attr">android:layout_alignParentLeft</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">android:layout_centerVertical</span>=<span class="string">"true"</span></div><div class="line">        /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"64dp"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#000000"</span></div><div class="line">        <span class="attr">android:layout_toRightOf</span>=<span class="string">"@id/img"</span></div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"15dip"</span></div><div class="line">        &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/title"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:singleLine</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"12sp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"校园实时热点"</span></div><div class="line">            <span class="attr">android:layout_alignParentLeft</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:layout_alignParentTop</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:layout_centerVertical</span>=<span class="string">"true"</span></div><div class="line">            /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/msg"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_below</span>=<span class="string">"@id/title"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"12sp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"jfkdsajflkdsajlk"</span></div><div class="line">            /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_below</span>=<span class="string">"@id/img"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/push_intro"</span></div><div class="line">    /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>如上面的这个布局，在没有展开的情况下，<code>push_intro</code>这个ImageView是不会显示的，只有在展开的情况下才会显示。</p>
+<p>另外，因为big style只有在通知栏第一个的位置，才会默认显示展开的内容，所以，我们通过设置<code>setPriority(NotificationCompat.PRIORITY_MAX)</code>提升自己notification的优先级，尽量让其显示在第一个，展示我们的big view。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">NotificationCompat.Builder builder = <span class="keyword">new</span></div><div class="line">        NotificationCompat.Builder(context)</div><div class="line">                .setAutoCancel(<span class="keyword">true</span>)</div><div class="line">                .setOngoing(<span class="keyword">false</span>)</div><div class="line">                .setVisibility(Notification.VISIBILITY_PUBLIC)</div><div class="line">                .setPriority(NotificationCompat.PRIORITY_MAX)</div><div class="line">                .setSmallIcon(R.drawable.logo)</div><div class="line">                .setContent(remoteViews);</div><div class="line"></div><div class="line">Notification notification = builder.build();</div><div class="line"></div><div class="line"><span class="keyword">if</span>(android.os.Build.VERSION.SDK_INT &gt;= <span class="number">16</span>) &#123;</div><div class="line">    notification.bigContentView = remoteViews;</div><div class="line">&#125;</div><div class="line">NotificationManager manager = (NotificationManager)</div><div class="line">            context.getSystemService(Context.NOTIFICATION_SERVICE);manager.notify(NOTICE_ID_TYPE_0, notification);</div></pre></td></tr></table></figure>
+<h2 id="heads-up"><a href="#heads-up" class="headerlink" title="heads-up"></a>heads-up</h2><p>5.0(21) 以上<br>官网上，可能触发浮动通知的条件示例包括：</p>
+<ul>
+<li><strong>用户的 Activity 处于全屏模式中(应用使用 fullScreenIntent)</strong></li>
+<li><strong>通知具有较高的优先级并使用铃声或振动</strong></li>
+</ul>
+<p>注意，<strong>handUp显示的view是我们notification默认样式的view，也就是调用<code>setContent()</code>或<code>notification.contentView</code>的view，这个就涉及到如果是big style的notification，并且采用了handUp的方式，并不会显示big view。</strong></p>
+<p>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">setFullScreenIntent(PendingIntent.getBroadcast(</div><div class="line">            context, <span class="number">0</span>, fullIntent(), </div><div class="line">            PendingIntent.FLAG_CANCEL_CURRENT)</div><div class="line">        , <span class="keyword">true</span>)</div><div class="line"></div><div class="line">或者</div><div class="line"></div><div class="line">setPriority(NotificationCompat.PRIORITY_MAX)</div><div class="line">setDefaults(Notification.DEFAULT_ALL)</div></pre></td></tr></table></figure></p>
+<h3 id="测试一"><a href="#测试一" class="headerlink" title="测试一"></a>测试一</h3><p>奶5手机：<br><code>setFullScreenIntent()</code>：显示悬浮窗，用户不操作不会消失。<br><code>setPriority()&amp;&amp;setDefaults()</code>：显示悬浮窗，几秒之后就会自动消失。</p>
+<h3 id="测试二"><a href="#测试二" class="headerlink" title="测试二"></a>测试二</h3><p>小米手机：<br><code>setFullScreenIntent()</code>：显示悬浮窗，几秒之后就会自动消失。<br><code>setPriority()&amp;&amp;setDefaults()</code>：显示悬浮窗，几秒之后就会自动消失。<br><strong>注意，小米手机必须在设置里面的通知栏管理，打开该app的悬浮窗通知。</strong></p>
+<h2 id="自定义smallIcon"><a href="#自定义smallIcon" class="headerlink" title="自定义smallIcon"></a>自定义smallIcon</h2><h3 id="smallIcon式样"><a href="#smallIcon式样" class="headerlink" title="smallIcon式样"></a>smallIcon式样</h3><p>如下图所示：<br><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_update.png" alt=""></p>
+<p>在状态栏显示一个动态改变的icon，经过调研，这个效果，可以有三种实现方式：</p>
+<p><strong>1、100张图片</strong><br>也就是说，让UI切0-99的100张图片，然后动态的去替换，听上去匪夷所思，其实，很多app都是这样实现的。<br><strong>2、100个xml</strong><br>就是针对1的优化，只需要提供0-9这10个数字的图片，然后提供外面圆边框的10-20张不同状态的图片，然后通过这些图片，自己写layer-list来实现。<br><strong>3、ClipDrawable</strong><br>针对2的优化，还是提供0-9的图片，针对图中的最右边的那些效果，只需要提供，一个白色底图和一个完全状态下的图(如全是蓝色的图)，然后我们通过<figure class="highlight plain"><figcaption><span>```调用```setLevel()```来实现切割，具体可参考：[用ClipDrawable实现音频录制麦克风讲话效果](http://www.jianshu.com/p/06eca50ddda4)</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">经过实验，感觉3可能有问题，虽然提供了`setSmallIcon(id, level)`</div><div class="line">这个API，这个针对`LevelListDrawable`，你可以通过如下来控制：</div><div class="line">```xml</div><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  </div><div class="line">&lt;level-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;  </div><div class="line">    &lt;!-- 0到 20显示这个图片--&gt;  </div><div class="line">    &lt;item android:drawable=&quot;@drawable/s1&quot; android:minLevel=&quot;0&quot; android:maxLevel=&quot;20&quot;&gt;&lt;/item&gt;  </div><div class="line">     &lt;!-- 21到 40显示这个图片--&gt;  </div><div class="line">    &lt;item android:drawable=&quot;@drawable/s2&quot; android:minLevel=&quot;21&quot; android:maxLevel=&quot;40&quot;&gt;&lt;/item&gt;  </div><div class="line">    &lt;!-- 41到 60显示这个图片--&gt;  </div><div class="line">    &lt;item android:drawable=&quot;@drawable/s3&quot; android:minLevel=&quot;41&quot; android:maxLevel=&quot;60&quot;&gt;&lt;/item&gt;  </div><div class="line">    &lt;!-- 61到100显示这个图片--&gt;  </div><div class="line">    &lt;item android:drawable=&quot;@drawable/s4&quot; android:minLevel=&quot;61&quot; android:maxLevel=&quot;100&quot;&gt;&lt;/item&gt;  </div><div class="line">&lt;/level-list&gt;</div></pre></td></tr></table></figure></p>
+<p>然后，在带面里面调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LevelListDrawable levelListDrawable = (LevelListDrawable) levelImg.getDrawable();  </div><div class="line">levelListDrawable.setLevel(<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
+<p>但是 我们如果要是那个用<code>ClipDrawable</code>，就可能是这样使用的：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">layer-list</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:id</span>=<span class="string">"@android:id/background"</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon_microphone_normal"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:id</span>=<span class="string">"@android:id/progress"</span> &gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">clip</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon_microphone_recoding"</span> <span class="attr">android:gravity</span>=<span class="string">"bottom"</span> <span class="attr">android:clipOrientation</span>=<span class="string">"vertical"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们会结合<code>LayerDrawable</code>来使用，而这个会影响到<code>LevelListDrawable</code>，所以貌似3是不行的。</p>
+<h3 id="smallIcon变白"><a href="#smallIcon变白" class="headerlink" title="smallIcon变白"></a>smallIcon变白</h3><p>在5.0以上的系统上发现，平常的自定义notification出来的icon，居然在状态栏上变成了纯白色的icon。为什么会这样呢？我们来看源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">applyColorsAndBackgrounds</span><span class="params">(StatusBarNotification sbn,</span></span></div><div class="line">            NotificationData.Entry entry) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (entry.expanded.getId() != com.android.internal.R.id.status_bar_latest_event_content) &#123;</div><div class="line">            <span class="comment">// Using custom RemoteViews</span></div><div class="line">            <span class="keyword">if</span> (entry.targetSdk &gt;= Build.VERSION_CODES.GINGERBREAD</div><div class="line">                    &amp;&amp; entry.targetSdk &lt; Build.VERSION_CODES.LOLLIPOP) &#123;</div><div class="line">                entry.row.setShowingLegacyBackground(<span class="keyword">true</span>);</div><div class="line">                entry.legacy = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// Using platform templates</span></div><div class="line">            <span class="keyword">final</span> <span class="keyword">int</span> color = sbn.getNotification().color;</div><div class="line">            <span class="keyword">if</span> (isMediaNotification(entry)) &#123;</div><div class="line">                entry.row.setTintColor(color == Notification.COLOR_DEFAULT</div><div class="line">                        ? mContext.getResources().getColor(</div><div class="line">                                R.color.notification_material_background_media_default_color)</div><div class="line">                        : color);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (entry.icon != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (entry.targetSdk &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</div><div class="line">                entry.icon.setColorFilter(mContext.getResources().getColor(android.R.color.white));</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                entry.icon.setColorFilter(<span class="keyword">null</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>关键代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (entry.targetSdk &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</div><div class="line">                entry.icon.setColorFilter(mContext.getResources().getColor(android.R.color.white));</div><div class="line">            &#125;</div></pre></td></tr></table></figure></p>
+<p>因为google在android5.0上面做了限制，为了统一系统风格。之后的状态栏icon只能够有白色和透明两个颜色出现。<br>5.0以上（不包含5.0），系统默认通知栏图标为系统启动图标，会自动将通知栏的图标（有色区域）全部填充为白色，为了去除白色图标，镂空背景即可：<br>所以5.0之后，icon必须为透明或白色。</p>
+<p>但是，如果我们要显示如下图所示：<br><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_update.png" alt=""></p>
+<p>因为前面的源码里面，有一个判断：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (entry.targetSdk &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</div><div class="line">                entry.icon.setColorFilter(mContext.getResources().getColor(android.R.color.white));</div><div class="line">            &#125;</div></pre></td></tr></table></figure></p>
+<p>所以我们可以通过降低<code>targetSdkVersion</code>来实现，将<code>targetSdkVersion</code>属性设置为20即可。</p>
+<h2 id="拾遗"><a href="#拾遗" class="headerlink" title="拾遗"></a>拾遗</h2><h3 id="setPriority"><a href="#setPriority" class="headerlink" title="setPriority"></a>setPriority</h3><p>4.1(16)之后的提供的方法，通知栏的优先级，从-2 ~ 2，优先级逐步提升，优先级越高，在通知栏排的越靠前，优先级高的会在notification在状态栏显示一个icon，优先级相同的，最近的显示在最上面。<br>有五个优先级别，如下：</p>
+<ul>
+<li>MAX     重要而紧急的通知，通知用户，时间紧迫的或者需要立即处理的。</li>
+<li>HIGH    高优先级用于重要的通信内容，例如短消息或者聊天。</li>
+<li>DEFAULT    默认优先级用于没有特殊优先级分类的通知。</li>
+<li>LOW    低优先级可以通知用户但又不是很紧急的事件。</li>
+<li>MIN    用于后台消息。最低优先级通知将只在状态栏显示图标，只有用户下拉通知抽屉才能看到内容。</li>
+</ul>
+<h3 id="setVisibility"><a href="#setVisibility" class="headerlink" title="setVisibility"></a>setVisibility</h3><p>5.0(21)之后提供的方法。<br>这个方法可以控制在锁屏上显示的通知中可见的详细级别。 如下：</p>
+<ul>
+<li>VISIBILITY_PUBLIC 显示通知的完整内容。</li>
+<li>VISIBILITY_SECRET 不会在锁定屏幕上显示此通知的任何部分。</li>
+<li>VISIBILITY_PRIVATE 显示通知图标和内容标题等基本信息，但是隐藏通知的完整内容。</li>
+</ul>
+<h3 id="addAction"><a href="#addAction" class="headerlink" title="addAction"></a>addAction</h3><p>5.0以上支持<br>Notification可以在底部添加一些扩展性的功能，让用户更加便捷的操作。</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_action.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">builder.addAction(R.drawable.ic_prev, <span class="string">"Previous"</span>,prevPendingIntent)</div><div class="line">builder.addAction(R.drawable.ic_pause, <span class="string">"Pause"</span>, pausePendingIntent) builder.addAction(R.drawable.ic_next, <span class="string">"Next"</span>, nextPendingIntent)</div></pre></td></tr></table></figure>
+<ul>
+<li>第一个参数是图标资源id </li>
+<li>第二个是图标显示的名称</li>
+<li>第三个图标点击要启动的PendingIntent</li>
+</ul>
+<p>特别和heads-up结合，在Android官网文档就有一个经典的场景，如下：</p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_notification_action_headsup.png" alt=""></p>
+<font color="#ff0000">但是，注意了，如果notification是自定义的View，就不行，会出现一些奇奇怪怪的问题，所以必须是默认的notification样式或者大视图布局</font>
+
+<h3 id="PendingIntent"><a href="#PendingIntent" class="headerlink" title="PendingIntent"></a>PendingIntent</h3><p>PendingIntent如果创建？<br>PendingIntent提供了很多方法来创建：</p>
+<p><code>PendingIntent.getActivity()</code>：启动一个Activity的PendingIntent如果创建<br><code>PendingIntent.getService()</code>：启动一个Service的PendingIntent如果创建<br><code>PendingIntent.getBroadCast()</code>：启动一个BroadCast的PendingIntent如果创建</p>
+<p>上面说的创建PendingIntent的三个方法，最后一个参数，有四种选择：</p>
+<ul>
+<li>FLAG_CANCEL_CURRENT：如果构建的PendingIntent已经存在，则取消前一个，重新构建一个。</li>
+<li>FLAG_NO_CREATE：如果前一个PendingIntent已经不存在了，将不再构建它。</li>
+<li>FLAG_ONE_SHOT：表明这里构建的PendingIntent只能使用一次。</li>
+<li>FLAG_UPDATE_CURRENT：如果构建的PendingIntent已经存在，那么系统将不会重复创建，只是把之前不同的传值替换掉。</li>
+</ul>
+<p>但是，如果使用<code>FLAG_UPDATE_CURRENT</code>时候，可能会遇到一些问题，点击通知栏后，系统没有响应，这是怎么回事呢？<br>原来使用<code>FLAG_UPDATE_CURRENT</code>这个参数后，系统不会重新创建新的<code>PendingIntent</code>，这样一来，如果你传递的<code>Intent</code>的 <code>extra</code>参数没有变化的话，那么系统就会认为你没有发送新的<code>PendingInten</code>t，这样就不会重新响应你的点击事件。怎么解决呢？<br>在<code>PendingIntent.getActivity()</code>这三个方法的第二个参数，我们只要为这个参数设置一个独一无二的标识，就可以解决这个问题了，大多数解决方法如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> requestCode = (<span class="keyword">int</span>) SystemClock.uptimeMillis();</div></pre></td></tr></table></figure></p>
+<p>获取发布通知时的时间，将它作为requestCode。<br>所以，我大多数都是用<code>FLAG_CANCEL_CURRENT</code>。</p>
+<p>notification中哪些地方会用到PendingIntent呢？<br>主要有三个地方：</p>
+<ul>
+<li>contentIntent：在通知窗口区域，Notification被单击时的响应事件由该intent触发；</li>
+<li>deleteIntent：当用户点击全部清除按钮时，响应该清除事件的Intent；</li>
+<li>fullScreenIntent：响应紧急状态的全屏事件（例如来电事件），也就是说通知来的时候，跳过在通知区域点击通知这一步，直接执行fullScreenIntent代表的事件。</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><strong>普通视图布局限制为 64 dp，扩展视图布局限制为 256 dp</strong></li>
+<li><strong>使用V4包里面的<code>NotificationCompat</code></strong></li>
+<li><strong><code>setSmallIcon()</code>必须设置</strong></li>
+<li><strong>android 4.1之后可以使用big style，当处于通知栏第一个的时候，才会展开</strong></li>
+<li><strong><code>contentView</code>和<code>bigContentView</code>可同时使用</strong></li>
+<li><strong>heads-up条件<code>setFullScreenIntent</code>或者<code>setPriority()&amp;&amp;setDefaults()</code></strong></li>
+<li><strong><code>setFullScreenIntent()</code>在奶5上会一直显示，直到用户操作</strong></li>
+<li><strong><code>setPriority()</code>设置显示位置</strong></li>
+<li><strong><code>addAction()</code>对自定义view不起作用</strong></li>
+<li><strong><code>PendingIntent</code>最好使用<code>FLAG_CANCEL_CURRENT</code></strong></li>
+</ol>
+<h2 id="代码下载"><a href="#代码下载" class="headerlink" title="代码下载"></a>代码下载</h2><p><a href="https://github.com/TryLoveCatch/notification" target="_blank" rel="external">TryLoveCatch</a></p>
+<p>参考：<a href="https://developer.android.com/guide/topics/ui/notifiers/notifications.html" target="_blank" rel="external">Android官方文档-通知</a><br><a href="http://blog.csdn.net/w804518214/article/details/51231946" target="_blank" rel="external">Android Notification常见样式总结</a><br><a href="http://blog.csdn.net/gtsong/article/details/41750739" target="_blank" rel="external">Android之Notification篇</a><br><a href="http://www.cnblogs.com/CharlesGrant/p/5600492.html" target="_blank" rel="external">android 5.0以上通知栏、状态栏图标变成白色</a><br><a href="http://blog.csdn.net/coder_pig/article/details/49025315" target="_blank" rel="external">Android中的13种Drawable小结 Part 3</a></p>
 
       
 
@@ -274,7 +373,11 @@
 		<ul class="article-tag-list">
 			 
         <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color5">javascript核心概念</a>
+        	<a href="javascript:void(0)" class="article-tag-list-link color3">android</a>
+        </li>
+       
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color3">notification</a>
         </li>
       
 		</ul>
@@ -330,7 +433,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://trylovecatch.github.io/2016/12/30/Notification相关知识/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +447,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/12/04/js-core-cifazuoyongyu/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/12/30/Bitmap优化之图片格式/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JavaScript核心概念之词法作用域
+          Bitmap优化之图片格式
         
       </div>
     </a>
   
   
-    <a href="/2016/12/04/js-core-hoisting/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaScript核心概念之声明提升(hoisting)</div>
+    <a href="/2016/12/30/Bitmap的大小/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Bitmap的大小</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -368,7 +471,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="js-core-scope-chain" data-title="JavaScript核心概念之作用域链(Scope Chain)" data-url="http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/"></div>
+	<div class="ds-thread" data-thread-key="Notification相关知识" data-title="Notification相关知识" data-url="http://trylovecatch.github.io/2016/12/30/Notification相关知识/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

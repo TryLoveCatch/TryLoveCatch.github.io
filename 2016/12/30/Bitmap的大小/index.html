@@ -6,27 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://trylovecatch.github.io">
-  <title>JavaScript核心概念之作用域链(Scope Chain) | TryLoveCatch</title>
+  <title>Bitmap的大小 | TryLoveCatch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+  <meta name="description" content="前言dpi和ppidpi和ppi基本一样
+我认为
 
-全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
+dpi是android定义的，是一些固定值，用于系统中px/dp转换的。如下图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript核心概念之作用域链(Scope Chain)">
-<meta property="og:url" content="http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/index.html">
+<meta property="og:title" content="Bitmap的大小">
+<meta property="og:url" content="http://trylovecatch.github.io/2016/12/30/Bitmap的大小/index.html">
 <meta property="og:site_name" content="TryLoveCatch">
-<meta property="og:description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+<meta property="og:description" content="前言dpi和ppidpi和ppi基本一样
+我认为
 
-全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
-<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg">
-<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/js-ecs.jpg">
-<meta property="og:updated_time" content="2016-12-04T09:23:25.000Z">
+dpi是android定义的，是一些固定值，用于系统中px/dp转换的。如下图">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_drawable_dpi_default.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_drawable_ppi_mult.png">
+<meta property="og:image" content="http://og9cdbtvi.bkt.clouddn.com/android_drawable_dpi_s.png">
+<meta property="og:updated_time" content="2016-12-30T06:59:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript核心概念之作用域链(Scope Chain)">
-<meta name="twitter:description" content="基本概念VO（variable object）&amp;emsp;&amp;emsp;一般指全局，是全局执行上下文的一个属性12345activeExecutionContext = &amp;#123;  VO: &amp;#123;    // 上下文数据（var, FD, function arguments)  &amp;#125;&amp;#125;;
+<meta name="twitter:title" content="Bitmap的大小">
+<meta name="twitter:description" content="前言dpi和ppidpi和ppi基本一样
+我认为
 
-全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的">
-<meta name="twitter:image" content="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg">
+dpi是android定义的，是一些固定值，用于系统中px/dp转换的。如下图">
+<meta name="twitter:image" content="http://og9cdbtvi.bkt.clouddn.com/android_drawable_dpi_default.png">
   
     <link rel="alternative" href="/atom.xml" title="TryLoveCatch" type="application/atom+xml">
   
@@ -152,84 +156,90 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-js-core-scope-chain" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Bitmap的大小" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript核心概念之作用域链(Scope Chain)
+      Bitmap的大小
     </h1>
   
 
-        <a href="/2016/12/04/js-core-scope-chain/" class="archive-article-date">
-  	<time datetime="2016-12-04T09:20:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-04</time>
+        <a href="/2016/12/30/Bitmap的大小/" class="archive-article-date">
+  	<time datetime="2016-12-30T06:04:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-30</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="VO（variable-object）"><a href="#VO（variable-object）" class="headerlink" title="VO（variable object）"></a>VO（variable object）</h3><p>&emsp;&emsp;一般指全局，是全局执行上下文的一个属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">activeExecutionContext = &#123;</div><div class="line">  <span class="attr">VO</span>: &#123;</div><div class="line">    <span class="comment">// 上下文数据（var, FD, function arguments)</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="dpi和ppi"><a href="#dpi和ppi" class="headerlink" title="dpi和ppi"></a>dpi和ppi</h3><p>dpi和ppi基本一样</p>
+<p>我认为</p>
 <blockquote>
-<p>全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的对象；<br>这个对象只存在一份，它的属性在程序中任何地方都可以访问，全局对象的生命周期终止于程序退出那一刻。<br>只有全局上下文的变量对象允许通过VO的属性名称来间接访问</p>
+<p>dpi是android定义的，是一些固定值，用于系统中px/dp转换的。如下图</p>
 </blockquote>
-<p>&emsp;&emsp;而在全局对象里<br>&emsp;&emsp;VO === this === global<br><a id="more"></a></p>
-<h3 id="AO（activation-object）"><a href="#AO（activation-object）" class="headerlink" title="AO（activation object）"></a>AO（activation object）</h3><p>&emsp;&emsp;在函数执行上下文中，VO是不能直接访问的，此时由活动对象(activation object,缩写为AO)扮演VO的角色，<font color="#ff0000">AO比VO多了一个arguments变量。</font></p>
-<p>&emsp;&emsp;<font color="#ff0000">活动对象是在进入函数上下文时刻被创建的，它通过函数的arguments属性初始化。</font></p>
-<h2 id="执行上下文（execution-context-简称-EC）"><a href="#执行上下文（execution-context-简称-EC）" class="headerlink" title="执行上下文（execution context 简称-EC）"></a>执行上下文（execution context 简称-EC）</h2><p>EC分两种，全局执行上下文和函数执行上下文。全局执行上下文只有一份，函数执行上下文可以有多个。<font color="#ff0000">对于每个Execution Context都有三个重要的属性，变量对象（Variable object，VO），作用域链（Scope chain）和this。</font></p>
-<h3 id="执行上下文栈（Execution-context-stack，ECS）"><a href="#执行上下文栈（Execution-context-stack，ECS）" class="headerlink" title="执行上下文栈（Execution context stack，ECS）"></a>执行上下文栈（Execution context stack，ECS）</h3><p>当一段程序开始时，会先进入全局执行上下文环境[global execution context]，用来存储当前上下文中所有已定义或可获取的变量、函数等，这个也是堆栈中最底部的元素，全局上下文取决于执行环境，如Node中的global和Browser中的window</p>
-<p>在生成新的上下文时，首先会绑定该上下文的变量对象，其中包括arguments和该函数中定义的变量；之后会创建属于该上下文的作用域链（scope chain），最后将this赋予这一function所属的Object，这一过程可以通过下图表示</p>
-<p><img src="http://og9cdbtvi.bkt.clouddn.com/js-context-stack.jpg" alt=""></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"global var"</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outerFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> b = <span class="string">"var in outerFunc"</span>;</div><div class="line">    <span class="built_in">console</span>.log(b);</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">innerFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> c = <span class="string">"var in innerFunc"</span>;</div><div class="line">        <span class="built_in">console</span>.log(c);</div><div class="line">        foo();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    innerFunc();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">outerFunc();</div></pre></td></tr></table></figure>
-<p>代码首先进入Global Execution Context，然后依次进入outerFunc，innerFunc和foo的执行上下文，ECS就可以表示为：</p>
-<p><img src="http://og9cdbtvi.bkt.clouddn.com/js-ecs.jpg" alt=""></p>
-<p>&emsp;&emsp;<font color="#ff0000">可以看出来，Js本身是单线程的，每当有function被执行时，就会产生一个新的上下文，这一上下文会被压入Js的ECS中，function执行结束后则被弹出，因此Js解释器总是在栈顶上下文中执行。</font>  </p>
-<p>执行上下文的代码被分成两个基本的阶段来处理：</p>
-<ol>
-<li>进入执行上下文(当函数被调用，但是开始执行函数内部代码之前)</li>
-<li>执行代码</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function test(a, b) &#123;</div><div class="line">  var c = 10;</div><div class="line">  function d() &#123;&#125;</div><div class="line">  var e = function _e() &#123;&#125;;</div><div class="line">  (function x() &#123;&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(10); // call</div></pre></td></tr></table></figure>
-<h3 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h3><p>这个阶段，VO将会包含如下属性（顺序也是如此）：</p>
-<ol>
-<li>函数的所有形参<br>&emsp;&emsp;没有传递对应参数的话，那么由名称和undefined值组成的一种变量对象的属性也将被创建。</li>
-<li>所有函数声明<br>&emsp;&emsp;如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li>
-<li>所有变量声明<br>&emsp;&emsp;如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性。<br>这些就是上篇声明提升Hoisting的原因，加强记忆，我们在看一个例子：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(foo);</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line">    <span class="built_in">console</span>.log(baz);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"bar"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> bar = <span class="number">20</span>;</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"baz"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>结果如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="literal">undefined</span></div><div class="line">[<span class="built_in">Function</span>: bar]</div><div class="line">[<span class="built_in">Function</span>: baz]</div><div class="line"><span class="number">20</span></div></pre></td></tr></table></figure></p>
-<p>声明提升，代码改造一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"bar"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"baz"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> foo;</div><div class="line">    <span class="keyword">var</span> bar;</div><div class="line">    </div><div class="line">    <span class="built_in">console</span>.log(foo);</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line">    <span class="built_in">console</span>.log(baz);</div><div class="line"></div><div class="line">    foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line">    bar = <span class="number">20</span>;</div><div class="line">    <span class="built_in">console</span>.log(bar);</div><div class="line"></div><div class="line">&#125;)()</div></pre></td></tr></table></figure></p>
-<p>开头那个例子，当进入带有参数10的test函数上下文时，AO表现为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">AO(test) = &#123;</div><div class="line">  a: 10,</div><div class="line">  b: undefined,</div><div class="line">  d: &lt;reference to FunctionDeclaration &quot;d&quot;&gt;</div><div class="line">  c: undefined,</div><div class="line">  e: undefined</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>注意，AO里并不包含函数“x”。这是因为“x”是一个函数表达式(FunctionExpression, 缩写为 FE) 而不是函数声明，函数表达式不会影响VO。</p>
-<p>&emsp;&emsp;<font color="#ff0000">这个阶段，其实可以解释上一篇关于声明提升的原理，变量声明在顺序上跟在函数声明和形式参数声明之后，变量声明不会干扰同名的形参和函数。</font></p>
-<h3 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h3><p>这个周期内，AO已经拥有了属性，不过，并不是所有的属性都有值，大部分属性的值还是系统默认的初始值undefined 。</p>
-<p>还是前面那个例子, AO在代码执行期间被修改如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">AO[<span class="string">'c'</span>] = <span class="number">10</span>;</div><div class="line">AO[<span class="string">'e'</span>] = <span class="xml"><span class="tag">&lt;<span class="name">reference</span> <span class="attr">to</span> <span class="attr">FunctionExpression</span> "<span class="attr">_e</span>"&gt;</span>;</span></div></pre></td></tr></table></figure></p>
-<p>在看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">    var a = 1;</div><div class="line">&#125; else &#123;</div><div class="line">    var b = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(a); // 1</div><div class="line">console.log(b); // undefined,不是b没有声明，而是b的值是undefined</div></pre></td></tr></table></figure></p>
-<p>虽然else部分代码永远不会执行，但是不管怎样，变量“b”仍然存在于VO中。javascript没有块状作用域。</p>
-<h2 id="作用域链（scope-chain）"><a href="#作用域链（scope-chain）" class="headerlink" title="作用域链（scope chain）"></a>作用域链（scope chain）</h2><p>作用域链，是在函数调用时创建的，包含该函数的AO和[[scope]]，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Scope = AO + [[Scope]]</div></pre></td></tr></table></figure></p>
-<p>这个涉及到函数的的生命周期，它分为创建和激活阶段（调用时）。</p>
-<p>还是最开始的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</div><div class="line">    alert(x +  y + z);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  bar();</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(); <span class="comment">// 60</span></div></pre></td></tr></table></figure></p>
-<h3 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h3><p>&emsp;&emsp;<font color="#ff0000">[[scope]]是函数内部的一个属性，与作用域链对比，[[scope]]是函数的一个属性而不是上下文。</font></p>
-<p>&emsp;&emsp;<font color="#ff0000">[[scope]]在函数创建时已经存在，静态不变的，永远永远，直至函数销毁。即：函数可以永不调用，但[[scope]]属性已经写入，并存储在函数对象中。</font></p>
-<p>[[scope]]保存所有父VO，举个例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</div><div class="line">    alert(x +  y + z);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  bar();</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo(); <span class="comment">// 60</span></div></pre></td></tr></table></figure>
-<p>程序开始执行时，创建了全局执行上下文，并压入ECS底部：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">globalContext.VO === Global = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">10</span></div><div class="line">  foo: <span class="function"><span class="keyword">function</span>&gt;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>在foo创建时，foo的[[scope]]属性是：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foo.[[Scope]] = [</div><div class="line">  globalContext.VO <span class="comment">// === Global</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>内部函数bar创建时，其[[scope]]为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bar.[[Scope]] = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><p>当执行foo()时，进入foo的EC，可参考上面关于EC的两个阶段，总的来说，这个时候很foo的AO对象创建了，如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fooContext.AO = &#123;</div><div class="line">  <span class="attr">y</span>: <span class="number">20</span>,</div><div class="line">  <span class="attr">bar</span>: <span class="function"><span class="keyword">function</span>&gt;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这个时候，foo的SC（作用域链）就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fooContext.Scope = fooContext.AO + foo.[[Scope]] <span class="comment">// i.e.:</span></div><div class="line"></div><div class="line">fooContext.Scope = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>执行foo的时候，bar也就执行了创建操作<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bar.[[Scope]] = [</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>接下来调用了bar()，所以bar的AO对象创建了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">barContext.AO = &#123;</div><div class="line">  <span class="attr">z</span>: <span class="number">30</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这个时候，bar的SC（作用域链）就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">barContext.Scope = barContext.AO + bar.[[Scope]] <span class="comment">// i.e.:</span></div><div class="line"></div><div class="line">barContext.Scope = [</div><div class="line">  barContext.AO,</div><div class="line">  fooContext.AO,</div><div class="line">  globalContext.VO</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>然后，程序执行到x +  y + z，开始在作用域链中查找变量<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">x</div><div class="line">barContext.AO (没有找到)</div><div class="line">fooContext.AO (没有找到)</div><div class="line">globalContext.VO (找到，返回<span class="number">10</span>)</div><div class="line"></div><div class="line">y</div><div class="line">barContext.AO (没有找到)</div><div class="line">fooContext.AO (找到，返回<span class="number">20</span>)</div><div class="line">globalContext.VO (没有查找)</div><div class="line"></div><div class="line">z</div><div class="line">barContext.AO (找到，返回<span class="number">30</span>)</div><div class="line">fooContext.AO (没有查找)</div><div class="line">globalContext.VO (没有查找)</div></pre></td></tr></table></figure></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>&emsp;&emsp;<font color="#ff0000">Scope = AO + [[Scope]]<br></font></p>
-<ol>
-<li>全局EC只有一个，永远位于ECS栈底。</li>
-<li>函数创建时，作用域[[scope]]就创建了，不会更改</li>
-<li>函数执行时，当前函数的EC生成，通过arguments初始化AO并绑定到EC，然后与[[scope]]创建函数的作用域链(SC)，之后this赋值。</li>
-</ol>
-<p>参考：<a href="https://www.kancloud.cn/kancloud/deep-understand-javascript/43689" target="_blank" rel="external">https://www.kancloud.cn/kancloud/deep-understand-javascript/43689</a><br><a href="https://www.kancloud.cn/kancloud/deep-understand-javascript/43691" target="_blank" rel="external">https://www.kancloud.cn/kancloud/deep-understand-javascript/43691</a></p>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_drawable_dpi_default.png" alt=""></p>
+<a id="more"></a>
+<p>我们可以通过代码来获取：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DisplayMetrics dm = getResources().getDisplayMetrics();  </div><div class="line"><span class="keyword">int</span> dpi = dm.densityDpi;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>ppi是实际的dpi，是实际计算出来的，公式如下，然后根据这个值，在上图中找到最接近的dpi。</p>
+</blockquote>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_drawable_ppi_mult.png" alt=""></p>
+<p>举个例子，小米pad，7.9英寸，2048*1536像素，我们运用上面的公式，得到ppi为326，然后根据dpi的图，可知，dpi为320。</p>
+<h3 id="decodeResource-和decodeFile"><a href="#decodeResource-和decodeFile" class="headerlink" title="decodeResource()和decodeFile()"></a>decodeResource()和decodeFile()</h3><blockquote>
+<p>decodeFile()用于读取SD卡上的图，得到的是图片的原始尺寸<br>decodeResource()用于读取Res、Raw等资源，得到的是图片的原始尺寸 * 缩放系数</p>
+</blockquote>
+<p>由上可知，decodeResource()比decodeFile()多了一个缩放系数，而这个缩放系数，依赖于屏幕密度和图片缩放的位置，参考上一篇。接下来，我们看一下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过BitmapFactory.Options的这几个参数可以调整缩放系数</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BitmapFactory</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Options</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">boolean</span> inScaled;     <span class="comment">// 默认true</span></div><div class="line">        <span class="keyword">public</span> <span class="keyword">int</span> inDensity;        <span class="comment">// 无dpi的文件夹下默认160</span></div><div class="line">        <span class="keyword">public</span> <span class="keyword">int</span> inTargetDensity;  <span class="comment">// 取决具体屏幕</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注释里面说的很清楚了，我们继续来看。</p>
+<p>假设我们有一张720*720的图片。</p>
+<p><strong><em>inScaled属性</em></strong></p>
+<blockquote>
+<p>如果inScaled设置为false，则不进行缩放，解码后图片大小为720x720; 否则请往下看。<br>如果inScaled设置为true或者不设置，则根据inDensity和inTargetDensity计算缩放系数。</p>
+</blockquote>
+<p><strong><em>inDensity属性</em></strong></p>
+<blockquote>
+<p>取决于图片的位置，默认或drawable下面，inDensity为160，drawable-xhdpi下面，inDensity为320，具体参见下图：</p>
+</blockquote>
+<p><img src="http://og9cdbtvi.bkt.clouddn.com/android_drawable_dpi_s.png" alt=""></p>
+<p>假设这张图片放到drawable目录下，<br>以1080p的MX4为例子，缩放系数 = inTargetDensity(具体480 / inDensity（默认160）= 3 = density, 解码后图片大小为2160x2160。</p>
+<p>假设这张图放到drawable-xhdpi下面，则为480/320 = 1.5，1.5<em>720 = 1080，所以得到的图片大小为1080</em>1080</p>
+<p><strong><em>inTargetDensity属性</em></strong></p>
+<blockquote>
+<p>取决于屏幕密度</p>
+</blockquote>
+<p>借用上面的例子<br>假设这张图片放到drawable目录下，<br>以1080p的MX4为例子，缩放系数 = inTargetDensity(具体480 / inDensity（默认160）= 3 = density, 解码后图片大小为2160x2160。</p>
+<p>那么，以720p的红米3为例子，缩放系数 = inTargetDensity(具体320 / inDensity（默认160）= 2 = density，解码后图片大小为1440x1440。</p>
+<p><strong><em>手动设置</em></strong><br>我们可以通过BitmapFactory.Options手动设置inTargetDensity和inDensity的值，来控制缩放系数。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">BitmapFactory.Options options = <span class="keyword">new</span> BitmapFactory.Options();</div><div class="line">options.inJustDecodeBounds = <span class="keyword">false</span>;</div><div class="line">options.inSampleSize = <span class="number">1</span>;</div><div class="line">options.inDensity = <span class="number">160</span>;</div><div class="line">options.inTargetDensity = <span class="number">160</span>;</div><div class="line">bitmap = BitmapFactory.decodeResource(getResources(),</div><div class="line">        R.drawable.origin, options);</div><div class="line"><span class="comment">// MX4上，虽然density = 3</span></div><div class="line"><span class="comment">// 但是通过设置inTargetDensity / inDensity = 160 / 160 = 1</span></div><div class="line"><span class="comment">// 解码后图片大小为720x720</span></div><div class="line">System.out.println(<span class="string">"w:"</span> + bitmap.getWidth()</div><div class="line">        + <span class="string">", h:"</span> + bitmap.getHeight());</div></pre></td></tr></table></figure></p>
+<h2 id="获取bitmap大小"><a href="#获取bitmap大小" class="headerlink" title="获取bitmap大小"></a>获取bitmap大小</h2><p>如何得到bitmap的大小呢？Android提供了一个Api，在Bitmap里面：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getByteCount</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// int result permits bitmaps up to 46,340 x 46,340</span></div><div class="line">    <span class="keyword">return</span> getRowBytes() * getHeight();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="怎么算的"><a href="#怎么算的" class="headerlink" title="怎么算的"></a>怎么算的</h2><p>看了getByteCount()的源码，getHeight()我们很熟悉了，返回的就是bitmap高度的像素(px)，那么getRowBytes()是什么东西呢？继续看代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getrowBytes</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">if</span> (mRecycled) &#123;</div><div class="line">          Log.w(TAG, <span class="string">"Called getRowBytes() on a recycle()'d bitmap! This is undefined behavior!"</span>);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> nativeRowBytes(mFinalizer.mNativeBitmap);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>呵呵呵，JNI？！好吧，你赢了。大体代码如下，爱看不看吧</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> SkBitmap::ComputeRowBytes(Config c, <span class="keyword">int</span> width) &#123;</div><div class="line">    <span class="keyword">return</span> SkColorTypeMinRowBytes(SkBitmapConfigToColorType(c), width);</div><div class="line">&#125;</div><div class="line">SkImageInfo.<span class="function">h</span></div><div class="line"> </div><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">SkColorTypeBytesPerPixel</span><span class="params">(SkColorType ct)</span> &#123;</div><div class="line">   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint8_t</span> gSize[] = &#123;</div><div class="line">    <span class="number">0</span>,  <span class="comment">// Unknown</span></div><div class="line">    <span class="number">1</span>,  <span class="comment">// Alpha_8</span></div><div class="line">    <span class="number">2</span>,  <span class="comment">// RGB_565</span></div><div class="line">    <span class="number">2</span>,  <span class="comment">// ARGB_4444</span></div><div class="line">    <span class="number">4</span>,  <span class="comment">// RGBA_8888</span></div><div class="line">    <span class="number">4</span>,  <span class="comment">// BGRA_8888</span></div><div class="line">    <span class="number">1</span>,  <span class="comment">// kIndex_8</span></div><div class="line">  &#125;;</div><div class="line">  SK_COMPILE_ASSERT(SK_ARRAY_COUNT(</div><div class="line">        gSize) == (<span class="keyword">size_t</span>)(kLastEnum_SkColorType + <span class="number">1</span>),</div><div class="line">                size_mismatch_with_SkColorType_enum);</div><div class="line"> </div><div class="line">   SkASSERT((<span class="keyword">size_t</span>)ct &lt; SK_ARRAY_COUNT(gSize));</div><div class="line">   <span class="keyword">return</span> gSize[ct];</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> size_t <span class="title">SkColorTypeMinRowBytes</span><span class="params">(SkColorType ct, <span class="keyword">int</span> width)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> width * SkColorTypeBytesPerPixel(ct);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明一下，gSize数组，仔细一看，是不是很熟悉？其实就是每一个像素点所占的字节数。所以，我们可以得出来：</p>
+<blockquote>
+<p>看了getByteCount()，返回的是width * 单像素点字节数</p>
+</blockquote>
+<p>所以如果一张ARGB_8888的bitmap的大小如下：</p>
+<blockquote>
+<p>width <em> height </em> 4bytes</p>
+</blockquote>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><blockquote>
+<p>一张522*686的 PNG 图片，我把它放到 drawable-xxhdpi 目录下，在三星s6上加载，占用内存2547360B。</p>
+</blockquote>
+<p>但是通过我们的方式计算，结果是1432368B。</p>
+<p>这个原因，估计大家也都明白了，我们之前包括上一篇也都说过了，就不再冗述了，drawable-xxhdpi是480，而s6是640，所以</p>
+<blockquote>
+<p>width <em> (640/480) </em> height <em> (640/480) </em> 4bytes = 2546432B</p>
+</blockquote>
+<h3 id="精度"><a href="#精度" class="headerlink" title="精度"></a>精度</h3><p>我们发现我们计算的2546432B和通过getByteCount()得到的已经很接近了，但是还是不一样。继续源码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> jobject <span class="title">doDecode</span><span class="params">(JNIEnv* env, SkStreamRewindable* stream, jobject padding, jobject options)</span> </span>&#123;</div><div class="line"> </div><div class="line">......</div><div class="line">    <span class="keyword">if</span> (env-&gt;GetBooleanField(options, gOptions_scaledFieldID)) &#123;</div><div class="line">        <span class="keyword">const</span> <span class="keyword">int</span> density = env-&gt;GetIntField(options, gOptions_densityFieldID);<span class="comment">//对应hdpi的时候，是240</span></div><div class="line">        <span class="keyword">const</span> <span class="keyword">int</span> targetDensity = env-&gt;GetIntField(options, gOptions_targetDensityFieldID);<span class="comment">//三星s6的为640</span></div><div class="line">        <span class="keyword">const</span> <span class="keyword">int</span> screenDensity = env-&gt;GetIntField(options, gOptions_screenDensityFieldID);</div><div class="line">        <span class="keyword">if</span> (density != <span class="number">0</span> &amp;&amp; targetDensity != <span class="number">0</span> &amp;&amp; density != screenDensity) &#123;</div><div class="line">            scale = (<span class="keyword">float</span>) targetDensity / density;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">const</span> <span class="keyword">bool</span> willScale = scale != <span class="number">1.0f</span>;</div><div class="line">......</div><div class="line">SkBitmap decodingBitmap;</div><div class="line"><span class="keyword">if</span> (!decoder-&gt;decode(stream, &amp;decodingBitmap, prefColorType,decodeMode)) &#123;</div><div class="line">   <span class="keyword">return</span> nullObjectReturn(<span class="string">"decoder-&gt;decode returned false"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//这里这个deodingBitmap就是解码出来的bitmap，大小是图片原始的大小</span></div><div class="line"><span class="keyword">int</span> scaledWidth = decodingBitmap.width();</div><div class="line"><span class="keyword">int</span> scaledHeight = decodingBitmap.height();</div><div class="line"><span class="keyword">if</span> (willScale &amp;&amp; decodeMode != SkImageDecoder::kDecodeBounds_Mode) &#123;</div><div class="line">    scaledWidth = <span class="keyword">int</span>(scaledWidth * scale + <span class="number">0.5f</span>);</div><div class="line">    scaledHeight = <span class="keyword">int</span>(scaledHeight * scale + <span class="number">0.5f</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (willScale) &#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">float</span> sx = scaledWidth / <span class="keyword">float</span>(decodingBitmap.width());</div><div class="line">    <span class="keyword">const</span> <span class="keyword">float</span> sy = scaledHeight / <span class="keyword">float</span>(decodingBitmap.height());</div><div class="line"> </div><div class="line">    <span class="comment">// <span class="doctag">TODO:</span> avoid copying when scaled size equals decodingBitmap size</span></div><div class="line">    SkColorType colorType = colorTypeForScaledOutput(decodingBitmap.colorType());</div><div class="line">    <span class="comment">// <span class="doctag">FIXME:</span> If the alphaType is kUnpremul and the image has alpha, the</span></div><div class="line">    <span class="comment">// colors may not be correct, since Skia does not yet support drawing</span></div><div class="line">    <span class="comment">// to/from unpremultiplied bitmaps.</span></div><div class="line">    outputBitmap-&gt;setInfo(SkImageInfo::Make(scaledWidth, scaledHeight,</div><div class="line">            colorType, decodingBitmap.alphaType()));</div><div class="line">    <span class="keyword">if</span> (!outputBitmap-&gt;allocPixels(outputAllocator, <span class="literal">NULL</span>)) &#123;</div><div class="line">        <span class="keyword">return</span> nullObjectReturn(<span class="string">"allocation failed for scaled bitmap"</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="comment">// If outputBitmap's pixels are newly allocated by Java, there is no need</span></div><div class="line">    <span class="comment">// to erase to 0, since the pixels were initialized to 0.</span></div><div class="line">    <span class="keyword">if</span> (outputAllocator != &amp;javaAllocator) &#123;</div><div class="line">        outputBitmap-&gt;eraseColor(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    SkPaint paint;</div><div class="line">    paint.setFilterLevel(SkPaint::kLow_FilterLevel);</div><div class="line"> </div><div class="line">    <span class="function">SkCanvas <span class="title">canvas</span><span class="params">(*outputBitmap)</span></span>;</div><div class="line">    canvas.scale(sx, sy);</div><div class="line">    canvas.drawBitmap(decodingBitmap, <span class="number">0.0f</span>, <span class="number">0.0f</span>, &amp;paint);</div><div class="line">&#125;</div><div class="line">......</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>关键代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (willScale &amp;&amp; decodeMode != SkImageDecoder::kDecodeBounds_Mode) &#123;</div><div class="line">    scaledWidth = <span class="keyword">int</span>(scaledWidth * scale + <span class="number">0.5f</span>);</div><div class="line">    scaledHeight = <span class="keyword">int</span>(scaledHeight * scale + <span class="number">0.5f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scaledWidth = <span class="keyword">int</span>( <span class="number">522</span> * <span class="number">640</span> / <span class="number">480f</span> + <span class="number">0.5</span>) = <span class="keyword">int</span>(<span class="number">696.5</span>) = <span class="number">696</span></div><div class="line">scaledHeight = <span class="keyword">int</span>( <span class="number">686</span> * <span class="number">640</span> / <span class="number">480f</span> + <span class="number">0.5</span>) = <span class="keyword">int</span>(<span class="number">915.16666</span>…) = <span class="number">915</span></div><div class="line"><span class="number">915</span> * <span class="number">696</span> * <span class="number">4</span> = <span class="number">2547360</span></div></pre></td></tr></table></figure>
+<p>完美~~~打完收工</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><strong>bitmap的大小，由以下三个决定：</strong><br><strong>1. 单像素点字节数</strong><br><strong>2. 图片文件存放的drawable文件夹位置</strong><br><strong>3. 手机屏幕密度</strong></p>
+<p>参考：<br><a href="http://jayfeng.com/2016/03/22/Android-Bitmap%E9%9D%A2%E9%9D%A2%E8%A7%82/" target="_blank" rel="external">Android Bitmap面面观</a><br><a href="http://bugly.qq.com/bbs/forum.php?mod=viewthread&amp;tid=498" target="_blank" rel="external">Android 开发绕不过的坑：你的 Bitmap 究竟占多大内存？</a><br><a href="http://seniorzhai.github.io/2014/10/24/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E7%9F%A5%E8%AF%86/" target="_blank" rel="external">Android屏幕适配知识</a><br><a href="http://leoray.leanote.com/post/android-resolution" target="_blank" rel="external">安卓分辨率的相关知识</a><br><a href="http://seniorzhai.github.io/2014/10/24/Android%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E7%9F%A5%E8%AF%86/" target="_blank" rel="external">Android屏幕适配知识</a><br><a href="http://www.jianshu.com/p/913943d25829" target="_blank" rel="external">详解Android开发中常用的 DPI / DP / SP</a><br><a href="https://developer.android.com/guide/practices/screens_support.html" target="_blank" rel="external">支持多种屏幕</a></p>
 
       
 
@@ -274,7 +284,15 @@
 		<ul class="article-tag-list">
 			 
         <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color5">javascript核心概念</a>
+        	<a href="javascript:void(0)" class="article-tag-list-link color3">android</a>
+        </li>
+       
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color4">drawable</a>
+        </li>
+       
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color2">bitmap</a>
         </li>
       
 		</ul>
@@ -330,7 +348,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://trylovecatch.github.io/2016/12/30/Bitmap的大小/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +362,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/12/04/js-core-cifazuoyongyu/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/12/30/Notification相关知识/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JavaScript核心概念之词法作用域
+          Notification相关知识
         
       </div>
     </a>
   
   
-    <a href="/2016/12/04/js-core-hoisting/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaScript核心概念之声明提升(hoisting)</div>
+    <a href="/2016/12/30/drawable文件夹顺序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">drawable文件夹顺序</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -368,7 +386,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="js-core-scope-chain" data-title="JavaScript核心概念之作用域链(Scope Chain)" data-url="http://trylovecatch.github.io/2016/12/04/js-core-scope-chain/"></div>
+	<div class="ds-thread" data-thread-key="Bitmap的大小" data-title="Bitmap的大小" data-url="http://trylovecatch.github.io/2016/12/30/Bitmap的大小/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
